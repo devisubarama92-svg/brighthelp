@@ -1,0 +1,45 @@
+﻿{% extends "base.html" %}
+
+{% block title %}Register - BrightHelp{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="register-page">
+    <form class="register-form">
+
+        <div class="input-group">
+            <span class="icon">👤</span>
+            <input type="text" placeholder="Full Name">
+        </div>
+
+        <div class="input-group">
+            <span class="icon">📧</span>
+            <input type="email" placeholder="Email Address">
+        </div>
+
+        <div class="input-group">
+            <span class="icon">🔑</span>
+            <input type="password" id="reg-password" placeholder="Create Password">
+            <span class="eye" onclick="toggleRegisterPassword()">👁️</span>
+        </div>
+
+        <button type="submit">Create Account</button>
+
+        <a href="/login" class="back-login">Back to Login</a>
+    </form>
+</div>
+
+<script>
+    function toggleRegisterPassword() {
+        var x = document.getElementById("reg-password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
+{% endblock %}

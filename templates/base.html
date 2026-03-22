@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}BrightHelp{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    {% block extra_head %}{% endblock %}
+    <style>
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 15px 20px;
+            font-size: 14px;
+            color: #0a2540;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 14px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.05);
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+    {% block content %}{% endblock %}
+
+    <footer class="footer">
+        © 2026 BrightHelp | Developed by Durga Subram | In the memories of Ammi 💙
+    </footer>
+
+</body>
+</html>

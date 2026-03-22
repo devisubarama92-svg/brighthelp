@@ -1,0 +1,22 @@
+﻿{% extends "base.html" %}
+
+{% block title %}BrightHelp{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="bg-container">
+    <div class="overlay-content">
+        <h1 class="title">BrightHelp</h1>
+        <p class="subtitle">Help at your fingertips</p>
+
+        <div class="home-buttons">
+            <a href="/login" class="main-btn">Get Started</a>
+            <a href="/request-help" class="secondary-btn">Request Help</a>
+            <a href="/view-requests" class="secondary-btn">View Requests</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

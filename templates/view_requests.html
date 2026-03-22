@@ -1,0 +1,157 @@
+﻿{% extends "base.html" %}
+
+{% block title %}View Requests - BrightHelp{% endblock %}
+
+{% block extra_css %}
+<style>
+    body {
+        background: url("/static/login_bg.jpg") no-repeat center center;
+        background-size: cover;
+        min-height: 100vh;
+        box-sizing: border-box;
+    }
+
+    .page-header {
+        background: rgba(255, 255, 255, 0.92);
+        padding: 18px 40px;
+        border-radius: 30px;
+        text-align: center;
+        margin: 40px auto 20px;
+        width: fit-content;
+        box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.08);
+    }
+
+        .page-header h1 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: 600;
+            color: #0a2540;
+        }
+
+    .request-card {
+        background: rgba(255, 255, 255, 0.92);
+        border-radius: 20px;
+        padding: 20px 28px;
+        margin: 20px auto;
+        max-width: 900px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    }
+
+        .request-card p {
+            margin: 10px 0;
+            color: #334155;
+            font-size: 16px;
+        }
+
+    .status-badge {
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 600;
+        display: inline-block;
+    }
+
+    .pending {
+        background: #fff3cd;
+        color: #d97706;
+    }
+
+    .accepted {
+        background: #dbeafe;
+        color: #2563eb;
+    }
+
+    .done {
+        background: #dcfce7;
+        color: #059669;
+    }
+
+    .action-row {
+        margin-top: 14px;
+    }
+
+    .action-btn {
+        display: inline-block;
+        padding: 10px 18px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: white;
+        font-size: 14px;
+        font-weight: 600;
+        margin-right: 10px;
+    }
+
+    .accept-btn {
+        background: #4CAF50;
+    }
+
+    .done-btn {
+        background: #2196F3;
+    }
+
+    .empty {
+        text-align: center;
+        color: #0a2540;
+        margin-top: 40px;
+        font-size: 18px;
+        background: rgba(255, 255, 255, 0.88);
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 16px 24px;
+        border-radius: 20px;
+    }
+
+    .back-home {
+        display: block;
+        text-align: center;
+        margin-top: 30px;
+        color: #0a2540;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 16px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Help Requests</h1>
+</div>
+
+{% if requests %}
+    {% for req in requests %}
+<div class="request-card">
+    <p><strong>Name:</strong> {{ req[1] }}</p>
+    <p><strong>Location:</strong> {{ req[2] }}</p>
+    <p><strong>Help Type:</strong> {{ req[3] }}</p>
+    <p><strong>Description:</strong> {{ req[4] }}</p>
+
+    <p>
+        <strong>Status:</strong>
+        {% if req[5] == 'Pending' %}
+        <span class="status-badge pending">Pending</span>
+        {% elif req[5] == 'Accepted' %}
+        <span class="status-badge accepted">Accepted</span>
+        {% elif req[5] == 'Done' %}
+        <span class="status-badge done">Done</span>
+        {% else %}
+        <span class="status-badge">None</span>
+        {% endif %}
+    </p>
+
+    <div class="action-row">
+        {% if req[5] == 'Pending' %}
+        <a href="/accept/{{ req[0] }}" class="action-btn accept-btn">Accept</a>
+        {% elif req[5] == 'Accepted' %}
+        <a href="/complete/{{ req[0] }}" class="action-btn done-btn">Done</a>
+        {% endif %}
+    </div>
+</div>
+    {% endfor %}
+{% else %}
+<p class="empty">No help requests submitted yet.</p>
+{% endif %}
+
+<a href="/" class="back-home">Back to Home</a>
+{% endblock %}
