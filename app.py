@@ -1,5 +1,6 @@
 ﻿from flask import Flask, render_template, request, redirect
 import sqlite3
+import os
 
 app = Flask(__name__)
 
@@ -58,7 +59,6 @@ def request_help():
         help_type = request.form.get('help_type')
         description = request.form.get('description')
 
-        # ALWAYS SET DEFAULT STATUS
         status = 'Pending'
 
         conn = sqlite3.connect('brighthelp.db')
@@ -122,7 +122,8 @@ def complete_request(id):
     return redirect('/view-requests')
 
 # -------------------------------
-# RUN SERVER
+# RUN SERVER (RENDER READY)
 # -------------------------------
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
